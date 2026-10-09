@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FinPulse Analytics - Financial intelligence, burn rate, and deep client-side storage diagnostics.">
+  <title>FinPulse - Analytics & Data Storage</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/analytics.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo" id="brand-link">
+          <div class="brand-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <span>FinPulse</span>
+          <span class="brand-badge">PRO</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main Navigation">
+        <div class="nav-section-title">Overview</div>
+        <a href="index.html" class="nav-item" id="nav-dashboard">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="transactions.html" class="nav-item" id="nav-transactions">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+          </svg>
+          <span>Transactions</span>
+        </a>
+
+        <div class="nav-section-title">Planning & Analysis</div>
+        <a href="budgets.html" class="nav-item" id="nav-budgets">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+          </svg>
+          <span>Budgets & Goals</span>
+        </a>
+
+        <a href="analytics.html" class="nav-item active" id="nav-analytics">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          <span>Analytics & Storage</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="avatar" id="sidebar-user-avatar">AM</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Alex Morgan</div>
+            <div class="user-role">Personal Workspace</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Open sidebar menu">
+            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+          <div class="page-title-box">
+            <h1>Analytics & Storage Diagnostics</h1>
+            <p>Spending metrics, category rankings, and browser storage inspection.</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Currency Picker -->
+          <div class="currency-select-box">
+            <label for="currency-select" style="font-size: 0.75rem; color: var(--text-muted);">Currency:</label>
+            <select id="currency-select" aria-label="Select Currency">
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="INR">INR (₹)</option>
+              <option value="JPY">JPY (¥)</option>
+            </select>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button class="icon-btn" id="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle theme">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+          </button>
+
+          <!-- Add Transaction Action -->
+          <button class="btn btn-primary" id="btn-header-add-tx" data-modal-open="global-tx-modal">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            <span>Add Transaction</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Body -->
+      <main class="content-area">
+        <!-- 4 Analytics Metric Cards -->
+        <section class="analytics-metrics-grid" aria-label="Key Performance Indicators">
+          <div class="card">
+            <div class="card-subtitle">Daily Average Burn Rate</div>
+            <div class="metric-value" id="kpi-daily-burn" style="color:var(--expense);">$0.00/day</div>
+            <div class="metric-footer">Based on 30-day spending</div>
+          </div>
+
+          <div class="card">
+            <div class="card-subtitle">Inflow / Outflow Ratio</div>
+            <div class="metric-value" id="kpi-in-out-ratio">0.0x</div>
+            <div class="metric-footer">Income divided by expenses</div>
+          </div>
+
+          <div class="card">
+            <div class="card-subtitle">Monthly Savings Ratio</div>
+            <div class="metric-value" id="kpi-savings-ratio" style="color:var(--income);">0%</div>
+            <div class="metric-footer">Retained from total earnings</div>
+          </div>
+
+          <div class="card">
+            <div class="card-subtitle">Net Cashflow</div>
+            <div class="metric-value" id="kpi-net-cash">$0.00</div>
+            <div class="metric-footer">Total Inflow minus Outflow</div>
+          </div>
+        </section>
+
+        <!-- Charts Grid -->
+        <section class="charts-grid" aria-label="Analytical Visualizations">
+          <!-- 6-Month Comparison Cashflow -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">6-Month Cashflow Trajectory</h2>
+                <div class="card-subtitle">Monthly comparison of Income (Green) vs Expenses (Red)</div>
+              </div>
+            </div>
+            <div class="canvas-container">
+              <canvas id="analytics-bar-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Category Donut -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Spending Proportions</h2>
+                <div class="card-subtitle">Distribution across all recorded categories</div>
+              </div>
+            </div>
+            <div class="canvas-container" style="min-height: 180px;">
+              <canvas id="analytics-donut-canvas"></canvas>
+            </div>
+            <div class="chart-legend" id="analytics-legend-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Category Rankings Progress List -->
+        <section class="card" style="margin-bottom: 2.5rem;" aria-label="Top Spending Categories">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Top Expense Categories Breakdown</h2>
+              <div class="card-subtitle">Ranked by total expenditure share</div>
+            </div>
+          </div>
+          <div class="category-ranking-list" id="category-ranking-container">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- Storage & Architecture Diagnostics Inspector -->
+        <section class="storage-section" aria-label="Storage Diagnostics">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                </svg>
+                Storage Architecture Inspector
+              </h2>
+              <div class="card-subtitle">Demonstration of Web Storage (LocalStorage/SessionStorage), Cookies, and IndexedDB</div>
+            </div>
+          </div>
+
+          <div class="storage-grid">
+            <!-- 1. LocalStorage Card -->
+            <div class="storage-card">
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <div class="storage-badge-icon badge-localstorage">LS</div>
+                <div>
+                  <h3 style="font-size: 1rem; font-weight: 700;">Web Storage (LocalStorage)</h3>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Synchronous client state</div>
+                </div>
+              </div>
+
+              <div class="storage-list">
+                <div class="storage-item">
+                  <span class="storage-item-key">Records Count</span>
+                  <span class="storage-item-val" id="diag-ls-count">0 items</span>
+                </div>
+                <div class="storage-item">
+                  <span class="storage-item-key">Storage Size</span>
+                  <span class="storage-item-val" id="diag-ls-size">0 KB</span>
+                </div>
+                <div class="storage-item">
+                  <span class="storage-item-key">Session Views (SessionStorage)</span>
+                  <span class="storage-item-val">Active</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Cookies Card -->
+            <div class="storage-card">
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <div class="storage-badge-icon badge-cookies">CK</div>
+                <div>
+                  <h3 style="font-size: 1rem; font-weight: 700;">Document Cookies</h3>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">User preferences & session tokens</div>
+                </div>
+              </div>
+
+              <div class="storage-list" id="diag-cookies-list">
+                <!-- Dynamically populated cookies -->
+              </div>
+            </div>
+
+            <!-- 3. IndexedDB Card -->
+            <div class="storage-card">
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <div class="storage-badge-icon badge-indexeddb">IDB</div>
+                <div>
+                  <h3 style="font-size: 1rem; font-weight: 700;">IndexedDB (FinPulseDB)</h3>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Asynchronous archive & audit logs</div>
+                </div>
+              </div>
+
+              <div class="storage-list">
+                <div class="storage-item">
+                  <span class="storage-item-key">transactions_archive</span>
+                  <span class="storage-item-val" id="diag-idb-archive">0 items</span>
+                </div>
+                <div class="storage-item">
+                  <span class="storage-item-key">audit_logs</span>
+                  <span class="storage-item-val" id="diag-idb-audit">0 events</span>
+                </div>
+                <div class="storage-item">
+                  <span class="storage-item-key">system_backups</span>
+                  <span class="storage-item-val" id="diag-idb-backups">0 snapshots</span>
+                </div>
+              </div>
+
+              <div class="storage-actions">
+                <button class="btn btn-primary btn-sm" id="btn-idb-backup" style="flex:1;">
+                  Create Backup
+                </button>
+                <button class="btn btn-secondary btn-sm" id="btn-idb-restore" style="flex:1;">
+                  Restore Latest
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; text-align: right;">
+            <button class="btn btn-danger btn-sm" id="btn-clear-all-data">
+              Clear All Application Storage & Reset
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Mobile Floating Action Button -->
+  <button class="fab-add" id="fab-add-tx" data-modal-open="global-tx-modal" aria-label="Quick Add Transaction">
+    <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+    </svg>
+  </button>
+
+  <!-- Mobile Bottom Tab Navigation -->
+  <nav class="mobile-nav-bar" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="transactions.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+      </svg>
+      <span>Transactions</span>
+    </a>
+    <a href="budgets.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+      </svg>
+      <span>Budgets</span>
+    </a>
+    <a href="analytics.html" class="mobile-nav-item active">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10"/>
+      </svg>
+      <span>Analytics</span>
+    </a>
+  </nav>
+
+  <!-- Global Modal: Add Transaction -->
+  <div class="modal-overlay" id="global-tx-modal" role="dialog" aria-modal="true" aria-labelledby="modal-add-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-add-title">Add Transaction</h3>
+        <button class="icon-btn" data-modal-close aria-label="Close modal">&times;</button>
+      </div>
+      <form id="global-quick-tx-form">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="add-tx-type">Transaction Type *</label>
+              <select class="form-select" id="add-tx-type" name="type" required>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="add-tx-amount">Amount *</label>
+              <input type="number" step="0.01" min="0.01" class="form-input" id="add-tx-amount" name="amount" placeholder="0.00" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="add-tx-title">Title / Description *</label>
+            <input type="text" class="form-input" id="add-tx-title" name="title" placeholder="e.g. Health Insurance" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="add-tx-category">Category *</label>
+              <select class="form-select" id="add-tx-category" name="category" required>
+                <option value="Food & Dining">🍔 Food & Dining</option>
+                <option value="Housing">🏠 Housing</option>
+                <option value="Transportation">🚗 Transportation</option>
+                <option value="Shopping">🛍️ Shopping</option>
+                <option value="Utilities">⚡ Utilities</option>
+                <option value="Entertainment">🎬 Entertainment</option>
+                <option value="Healthcare">🏥 Healthcare</option>
+                <option value="Salary">💼 Salary</option>
+                <option value="Freelance">💻 Freelance</option>
+                <option value="Investments">📈 Investments</option>
+                <option value="Other">📦 Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="add-tx-date">Date *</label>
+              <input type="date" class="form-input" id="add-tx-date" name="date" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="add-tx-method">Payment Method</label>
+              <select class="form-select" id="add-tx-method" name="method">
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Apple Pay">Apple Pay</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Cash">Cash</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="add-tx-notes">Notes (Optional)</label>
+              <input type="text" class="form-input" id="add-tx-notes" name="notes">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>
