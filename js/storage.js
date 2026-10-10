@@ -375,10 +375,10 @@ const StorageManager = {
       return raw ? JSON.parse(raw) : {
         currency: 'USD',
         theme: 'dark',
-        userName: 'Alex Morgan'
+        userName: 'Parag Asija'
       };
     } catch (e) {
-      return { currency: 'USD', theme: 'dark', userName: 'Alex Morgan' };
+      return { currency: 'USD', theme: 'dark', userName: 'parag' };
     }
   },
 
@@ -403,7 +403,7 @@ const StorageManager = {
   setSessionFilters(filters) {
     try {
       sessionStorage.setItem('finpulse_active_filters', JSON.stringify(filters));
-    } catch (e) {}
+    } catch (e) { }
   },
 
   clearSessionFilters() {
@@ -488,7 +488,7 @@ function seedInitialData(force = false) {
   const settings = {
     currency: CookieManager.get('fp_currency') || 'USD',
     theme: CookieManager.get('fp_theme') || 'dark',
-    userName: CookieManager.get('fp_user_name') || 'Alex Morgan'
+    userName: CookieManager.get('fp_user_name') || 'parag'
   };
   StorageManager.saveSettings(settings);
 

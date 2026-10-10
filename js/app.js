@@ -133,7 +133,7 @@ const App = {
   // USER PROFILE
   // --------------------------------------------------------------------------
   renderUserProfile() {
-    const name = CookieManager.get('fp_user_name') || StorageManager.getSettings().userName || 'Alex Morgan';
+    const name = CookieManager.get('fp_user_name') || StorageManager.getSettings().userName || ' Morgan';
     const nameEl = document.getElementById('sidebar-user-name');
     if (nameEl) nameEl.textContent = name;
   },
